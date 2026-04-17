@@ -14,4 +14,109 @@ Text Domain: motaphoto
 Tags: portfolio, photography, custom-theme
 */
 
-/* Les styles du thème seront ajoutés progressivement au fur et à mesure du projet */
+/* =========================================================================
+   VARIABLES CSS — Couleurs, polices, tailles (charte graphique Nathalie Mota)
+   ========================================================================= */
+:root {
+    /* Couleurs */
+    --color-red:            #E00000;
+    --color-red-light:      #FE5858;
+    --color-pink:           #FFD6D6;
+    --color-black:          #000000;
+    --color-dark-blue:      #313144;
+    --color-gray-dark:      #C4C4C4;
+    --color-gray:           #D8D8D8;
+    --color-gray-light:     #E5E5E5;
+    --color-white:          #FFFFFF;
+
+    /* Polices */
+    --font-title:           'Space Mono', monospace;
+    --font-body:            'Poppins', sans-serif;
+
+    /* Tailles de police Desktop */
+    --fs-h1:                96px;
+    --fs-h2:                66px;
+    --fs-h3:                18px;
+    --fs-description:       14px;
+    --fs-body:              14px;
+}
+
+/* Tailles de police Mobile (≤ 768px) */
+@media (max-width: 768px) {
+    :root {
+        --fs-h1:            28px;
+        --fs-h2:            46px;
+    }
+}
+
+/* =========================================================================
+   RESET MINIMAL — Base propre pour tous les navigateurs
+   ========================================================================= */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font: inherit;
+}
+
+/* =========================================================================
+   TYPOGRAPHIE DE BASE
+   ========================================================================= */
+body {
+    font-family: var(--font-body);
+    font-weight: 300; /* Light par défaut */
+    font-size: var(--fs-body);
+    color: var(--color-black);
+    line-height: 1.5;
+    background-color: var(--color-white);
+}
+
+h1 {
+    font-family: var(--font-title);
+    font-size: var(--fs-h1);
+    font-weight: 700;
+    font-style: italic;
+}
+
+h2 {
+    font-family: var(--font-title);
+    font-size: var(--fs-h2);
+    font-weight: 400;
+    font-style: italic;
+}
+
+h3 {
+    font-family: var(--font-title);
+    font-size: var(--fs-h3);
+    font-weight: 400;
+    letter-spacing: 0.1em; /* 10% comme dans Figma */
+    text-transform: uppercase;
+}
