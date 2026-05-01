@@ -120,3 +120,351 @@ h3 {
     letter-spacing: 0.1em; /* 10% comme dans Figma */
     text-transform: uppercase;
 }
+
+/* =========================================================================
+   LAYOUT GLOBAL
+   ========================================================================= */
+.site-content {
+    min-height: calc(100vh - 180px); /* espace entre header et footer */
+}
+
+/* =========================================================================
+   HEADER
+   ========================================================================= */
+.site-header {
+    background-color: var(--color-white);
+    padding: 20px 110px;
+    border-bottom: 1px solid var(--color-gray-light);
+}
+
+.site-header__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.site-header__logo img {
+    height: 14px;
+    width: 216px;
+}
+
+/* Menu principal (desktop) */
+.site-header__nav .main-menu {
+    display: flex;
+    gap: 48px;
+    align-items: center;
+}
+
+.site-header__nav .main-menu a {
+    font-family: var(--font-title);
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-black);
+    transition: color 0.3s ease;
+}
+
+.site-header__nav .main-menu a:hover {
+    color: var(--color-red);
+}
+
+/* Burger (caché par défaut sur desktop) */
+.burger {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    padding: 8px;
+}
+
+.burger__bar {
+    display: block;
+    width: 28px;
+    height: 2px;
+    background-color: var(--color-black);
+    transition: transform 0.3s ease;
+}
+
+/* =========================================================================
+   MENU MOBILE (overlay plein écran rouge)
+   ========================================================================= */
+.mobile-menu {
+    position: fixed;
+    inset: 0;
+    background-color: var(--color-red);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.mobile-menu.is-open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.mobile-menu__close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 32px;
+    color: var(--color-white);
+    line-height: 1;
+    padding: 8px;
+}
+
+.mobile-menu__list {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    text-align: center;
+}
+
+.mobile-menu__list a {
+    font-family: var(--font-title);
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-white);
+}
+
+/* =========================================================================
+   FOOTER
+   ========================================================================= */
+.site-footer {
+    background-color: var(--color-white);
+    padding: 30px 10px;
+    border-top: 1px solid var(--color-gray-light);
+}
+
+.site-footer__inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.site-footer__link,
+.site-footer__copy {
+    font-family: var(--font-title);
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-black);
+    transition: color 0.3s ease;
+    line-height: 1;
+}
+
+.site-footer__link:hover {
+    color: var(--color-red);
+}
+
+/* =========================================================================
+   RESPONSIVE MOBILE (≤ 768px)
+   ========================================================================= */
+@media (max-width: 768px) {
+
+    /* Header mobile */
+    .site-header {
+        padding: 15px 20px;
+    }
+
+    .site-header__nav .main-menu {
+        display: none; /* on cache le menu horizontal */
+    }
+
+    .burger {
+        display: flex; /* on affiche le burger */
+    }
+
+    /* Footer mobile : items empilés */
+    .site-footer__inner {
+        flex-direction: column;
+        gap: 30px;
+        text-align: center;
+    }
+
+    .site-footer {
+        padding: 40px 20px;
+    }
+}
+
+/* =========================================================================
+   MODALE DE CONTACT
+   ========================================================================= */
+
+/* Utilitaire accessibilité */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.contact-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* aligné en haut au lieu de centré verticalement */
+    padding-top: 80px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.contact-modal.is-open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.contact-modal__overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+
+.contact-modal__inner {
+    position: relative;
+    background-color: var(--color-white);
+    width: 90%;
+    max-width: 600px;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 20px 60px 40px; /* padding-top réduit (était 50px) */
+    z-index: 1;
+}
+
+/* =========================================================================
+   BANDEAU "CONTACTCONTACT..." sur 2 lignes débordantes
+   ========================================================================= */
+.contact-modal__banner {
+    margin: 0 -60px 50px; /* déborde hors de la modale */
+    overflow: hidden;
+    line-height: 0.95;
+}
+
+.contact-modal__banner-text {
+    display: block;
+    white-space: nowrap;
+    font-family: var(--font-title);
+    font-size: 56px;
+    font-weight: 400;       /* graisse normale au lieu de bold */
+    font-style: italic;
+    color: var(--color-black);
+    letter-spacing: 0;
+    transform: translateX(-30px);
+}
+
+.contact-modal__banner-text + .contact-modal__banner-text {
+    transform: translateX(-180px);
+}
+
+/* =========================================================================
+   FORMULAIRE
+   ========================================================================= */
+.contact-modal__form {
+    max-width: 263px;
+    margin: 0 auto;
+}
+
+.contact-modal__form label {
+    display: block;
+    margin-bottom: 22px;
+    font-family: var(--font-title);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-black);
+}
+
+.contact-modal__form input[type="text"],
+.contact-modal__form input[type="email"],
+.contact-modal__form textarea {
+    display: block;
+    width: 100%;
+    margin-top: 8px;
+    padding: 10px 14px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--color-black);
+    background-color: var(--color-white);
+    border: 1px solid var(--color-gray);
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.contact-modal__form input[type="text"]:focus,
+.contact-modal__form input[type="email"]:focus,
+.contact-modal__form textarea:focus {
+    border-color: var(--color-black);
+}
+
+.contact-modal__form textarea {
+    min-height: 180px;
+    resize: vertical;
+}
+
+/* Bouton Envoyer */
+.contact-modal__form input[type="submit"] {
+    display: block;
+    width: 100%;
+    margin-top: 12px;
+    padding: 16px 24px;
+    font-family: var(--font-title);
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    color: var(--color-black);
+    background-color: var(--color-gray);
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.contact-modal__form input[type="submit"]:hover {
+    background-color: var(--color-black);
+    color: var(--color-white);
+}
+
+/* Responsive mobile */
+@media (max-width: 768px) {
+    .contact-modal {
+        padding-top: 40px;
+    }
+
+    .contact-modal__inner {
+        width: 92%;
+        padding: 15px 24px 30px;
+    }
+
+    .contact-modal__banner {
+        margin: 0 -24px 30px;
+    }
+
+    .contact-modal__banner-text {
+        font-size: 32px;
+    }
+}
